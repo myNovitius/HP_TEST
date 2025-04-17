@@ -1,120 +1,317 @@
 body {
-    font-family: sans-serif;
-    background-color: #222; /* Daha koyu bir arka plan */
-    color: #eee; /* Açık renk metin */
-    display: flex;
-    flex-direction: column; /* Öğeleri dikey olarak sırala */
-    align-items: center;
-    min-height: 100vh;
+    font-family: serif; /* Daha gotik bir yazı tipi */
     margin: 0;
-    padding-top: 20px; /* Üstten biraz boşluk */
-    box-sizing: border-box; /* Padding ve border'ı genişliğe dahil et */
+    background-color: #1e1e1e; /* Koyu gri arka plan */
+    color: #d4d4d4; /* Açık gri yazı rengi */
+    display: flex;
+    min-height: 100vh;
 }
 
-#envanter-alani {
-    position: fixed; /* Sabit позиция */
-    top: 10px;
-    left: 10px;
-    background-color: rgba(0, 0, 0, 0.7); /* Yarı saydam siyah arka plan */
-    color: #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+#game-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #252525; /* Daha koyu gri kutu arka planı */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#inventory-panel {
     width: 200px;
-    text-align: left;
+    background-color: #333; /* Koyu envanter arka planı */
+    border-right: 1px solid #555; /* Koyu kenarlık */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-#envanter-alani h2 {
+#inventory-panel h3 {
     margin-top: 0;
-    font-size: 1.2em;
+    color: #eee;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-#envanter {
-    list-style-type: none;
+#inventory-list {
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
-#envanter li {
-    margin-bottom: 5px;
+#inventory-list li {
+    padding: 5px 0;
+    border-bottom: 1px dotted #555;
 }
 
-#karakter-yaratma-ekrani, #oyun-alani {
-    background-color: #333; /* Daha koyu içerik alanı */
+#inventory-list li:last-child {
+    border-bottom: none;
+}
+
+#money-status {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #555;
+    color: #eee;
+    font-weight: bold;
+}
+
+#main-content {
+    flex-grow: 1;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen {
+    display: none; /* Tüm ekranlar başlangıçta gizli */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.screen:first-child {
+    display: block; /* İlk ekran (karakter oluşturma) görünür */
+}
+
+.screen h2 {
+    color: #b0c4de; /* Açık mavi/gri başlık rengi */
+    border-bottom: 2px solid #87cefa; /* Açık mavi alt çizgi */
+    padding-bottom: 15px;
+    margin-bottom: 20px;
     text-align: center;
-    margin-bottom: 20px; /* Alt boşluk */
-    width: 80%; /* Daha geniş alan */
-    max-width: 800px; /* Maksimum genişlik */
 }
 
-label {
-    display: inline-block;
-    width: 150px;
-    text-align: left;
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
     margin-bottom: 5px;
-    color: #ccc;
+    font-weight: bold;
+    color: #d4d4d4;
 }
 
-input[type="text"], input[type="number"], select {
-    width: 200px;
+.form-group input[type="text"],
+.ability-input input[type="number"] {
     padding: 8px;
-    margin-bottom: 10px;
     border: 1px solid #555;
     border-radius: 4px;
+    width: 100%;
     box-sizing: border-box;
+    margin-bottom: 5px;
     background-color: #444;
+    color: #d4d4d4;
+}
+
+#ability-distribution h3 {
+    color: #b0c4de;
+    margin-top: 20px;
+    border-bottom: 1px solid #87cefa;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.ability {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ability label {
+    flex-grow: 1;
+}
+
+.ability-input {
+    display: flex;
+    align-items: center;
+}
+
+.ability-input input[type="number"] {
+    width: 60px;
+    margin-right: 10px;
+}
+
+.ability-value {
     color: #eee;
+    font-weight: bold;
 }
 
-button {
-    background-color: #5cb85c;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 5px;
+#remaining-points {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #98fb98; /* Açık yeşil kalan puan rengi */
+    text-align: center;
 }
 
-button:hover {
-    background-color: #4cae4c;
+#background-selection h3 {
+    color: #b0c4de;
+    margin-top: 20px;
+    border-bottom: 1px solid #87cefa;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-#oyun-metni {
-    margin-bottom: 20px;
-    text-align: left;
+.radio-group {
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-#oyun-metni button {
-    display: block; /* Butonları alt alta sırala */
-    width: 100%; /* Butonların tam genişlikte olmasını sağla */
-    box-sizing: border-box; /* Padding'i genişliğe dahil et */
-    margin-bottom: 10px; /* Butonlar arasında boşluk */
+.radio-group input[type="radio"] {
+    margin-right: 5px;
 }
 
-h1, h2 {
-    color: #ddd;
+.radio-group label {
+    color: #d4d4d4;
 }
 
-#oyun-metni > button#devam-et-butonu {
-    position: fixed;
-    bottom: 20px; /* Ekranın altından 20 piksel yukarıda */
-    left: 50%; /* Yatayda ortala */
-    transform: translateX(-50%); /* Butonu kendi genişliğinin yarısı kadar sola kaydırarak tam ortalama */
-    background-color: #007bff; /* Daha belirgin bir renk */
-    color: white;
+#create-character-button,
+#finish-shopping-button,
+#send-button,
+#sorting-hat-answers button {
+    background-color: #555; /* Koyu buton rengi */
+    color: #eee;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    z-index: 10; /* Diğer elementlerin üzerinde görünmesini sağlar */
+    margin-top: 20px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#oyun-metni > button#devam-et-butonu:hover {
-    background-color: #0056b3;
+#create-character-button:hover,
+#finish-shopping-button:hover,
+#send-button:hover,
+#sorting-hat-answers button:hover {
+    background-color: #666;
+}
+
+#sorting-hat {
+    text-align: center;
+}
+
+#sorting-hat-question {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d4d4d4;
+    font-weight: bold;
+}
+
+#sorting-hat-answers button {
+    display: inline-block;
+    margin: 10px;
+}
+
+#sorting-hat-result {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #98fb98;
+}
+
+#diagon-alley h2 {
+    text-align: left;
+    color: #b0c4de;
+}
+
+#shops {
+    margin-bottom: 20px;
+}
+
+.shop {
+    border: 1px solid #555;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.shop h3 {
+    color: #b0c4de;
+    margin-top: 0;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #d4d4d4;
+}
+
+.item button {
+    margin-left: 15px;
+    background-color: #444;
+    color: #eee;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.item button:hover {
+    background-color: #555;
+}
+
+#game-play h1 {
+    color: #b0c4de;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#message-area {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #555;
+    background-color: #444;
+    border-radius: 5px;
+    color: #d4d4d4;
+    min-height: 100px;
+    overflow-y: auto;
+}
+
+#input-area {
+    display: flex;
+    align-items: center;
+}
+
+#input-area label {
+    margin-right: 10px;
+    color: #d4d4d4;
+    font-weight: bold;
+}
+
+#input-area input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    margin-right: 10px;
+    background-color: #333;
+    color: #d4d4d4;
+}
+
+#input-area button {
+    background-color: #555;
+    color: #eee;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#input-area button:hover {
+    background-color: #666;
 }
