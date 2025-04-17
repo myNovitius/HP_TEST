@@ -6,94 +6,7 @@ const envanterListesi = document.getElementById('envanter');
 const envanterAlani = document.getElementById('envanter-alani');
 let mevcutOlay; // Mevcut olayı takip etmek için değişken
 
-function karakterYarat() {
-    const ad = document.getElementById('karakter-adi').value;
-    const bina = document.getElementById('bina').value;
-    const zeka = parseInt(document.getElementById('zeka').value);
-    const cesaret = parseInt(document.getElementById('cesaret').value);
-    const azim = parseInt(document.getElementById('azim').value);
-    const wicca = parseInt(document.getElementById('wicca').value);
-
-    karakter = {
-        ad: ad,
-        bina: bina,
-        statlar: {
-            zeka: zeka,
-            cesaret: cesaret,
-            azim: azim,
-            wicca: wicca
-        },
-        envanter: ["Asa"],
-        mevcutKonum: "King's Cross İstasyonu, Peron 9 ¾"
-    };
-
-    karakterYaratmaEkrani.style.display = 'none';
-    oyunAlani.style.display = 'block';
-    envanterAlani.style.display = 'block';
-
-    oyunMetniAlani.innerHTML = `Adınız ${karakter.ad}. Hogwarts'a gitmek için sabırsızlanıyorsunuz. King's Cross İstasyonu'nda, duman ve uğultu arasında Peron 9 ¾'ü buldunuz. Kızıl renkli Hogwarts Ekspresi sizi bekliyor.<br><br>`;
-    guncelleEnvanter();
-    mevcutOlay = hogwartsEkspresineBinisOlayi;
-    // İlk olayın metnini ve seçeneklerini doğrudan burada göster
-    olay(mevcutOlay.metin, mevcutOlay.secenekler);
-}
-
-function guncelleEnvanter() {
-    envanterListesi.innerHTML = '';
-    karakter.envanter.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        envanterListesi.appendChild(li);
-    });
-}
-
-function envantereEkle(item) {
-    karakter.envanter.push(item);
-    guncelleEnvanter();
-}
-
-function statKontrolu(stat, zorluk) {
-    return karakter.statlar[stat] >= zorluk;
-}
-
-function olay(metin, secenekler) {
-    oyunMetniAlani.innerHTML += `${metin}<br>`;
-    secenekler.forEach((secenek, index) => {
-        const button = document.createElement('button');
-        button.textContent = secenek.metin;
-        button.onclick = () => secimYap(index);
-        oyunMetniAlani.appendChild(button);
-    });
-}
-
-function secimYap(secimIndex) {
-    const secilenSecenek = mevcutOlay.secenekler[secimIndex];
-    oyunMetniAlani.innerHTML += `<br><br>${typeof secilenSecenek.sonuc === 'function' ? secilenSecenek.sonuc() : secilenSecenek.sonuc}<br><br>`;
-    if (secilenSecenek.sonrakiOlay) {
-        mevcutOlay = secilenSecenek.sonrakiOlay;
-        const devamButton = document.createElement('button');
-        devamButton.textContent = "Devam Et";
-        devamButton.id = "devam-et-butonu"; // "Devam Et" butonuna ID eklendi
-        devamButton.onclick = sonrakiOlayiGoster;
-        oyunMetniAlani.appendChild(devamButton);
-    } else {
-        oyunMetniAlani.innerHTML += "<br>Hikayenin bu kısmı sona erdi.";
-    }
-    guncelleEnvanter();
-}
-
-function sonrakiOlayiGoster() {
-    oyunMetniAlani.innerHTML = ''; // Önceki metni temizle
-    if (mevcutOlay) {
-        olay(mevcutOlay.metin, mevcutOlay.secenekler);
-    } else {
-        oyunMetniAlani.innerHTML = "Oyun sona erdi.";
-    }
-}
-
 // --- Hogwarts Ekspresi Hikayesi (Kitaba Göre) ---
-
-// Oyunun başlangıç olayı
 const hogwartsEkspresineBinisOlayi = {
     metin: "King's Cross İstasyonu'nda Hogwarts Ekspresi'ni arıyorsunuz. 9 ¾ peronunu buldunuz ve trene bindiniz.",
     secenekler: [
@@ -240,6 +153,81 @@ const siralamaToreniOlayi = {
     ]
 };
 
+function karakterYarat() {
+    const ad = document.getElementById('karakter-adi').value;
+    const bina = document.getElementById('bina').value;
+    const zeka = parseInt(document.getElementById('zeka').value);
+    const cesaret = parseInt(document.getElementById('cesaret').value);
+    const azim = parseInt(document.getElementById('azim').value);
+    const wicca = parseInt(document.getElementById('wicca').value);
+
+    karakter = {
+        ad: ad,
+        bina: bina,
+        statlar: {
+            zeka: zeka,
+            cesaret: cesaret,
+            azim: azim,
+            wicca: wicca
+        },
+        envanter: ["Asa"],
+        mevcutKonum: "King's Cross İstasyonu, Peron 9 ¾"
+    };
+
+    karakterYaratmaEkrani.style.display = 'none';
+    oyunAlani.style.display = 'block';
+    envanterAlani.style.display = 'block';
+
+    oyunMetniAlani.innerHTML = `Adınız ${karakter.ad}. Hogwarts'a gitmek için sabırsızlanıyorsunuz. King's Cross İstasyonu'nda, duman ve uğultu arasında Peron 9 ¾'ü buldunuz. Kızıl renkli Hogwarts Ekspresi sizi bekliyor.<br><br>`;
+    guncelleEnvanter();
+    mevcutOlay = hogwartsEkspresineBinisOlayi;
+    olay(mevcutOlay.metin, mevcutOlay.secenekler);
+}
+
+function guncelleEnvanter() {
+    envanterListesi.innerHTML = '';
+    karakter.envanter.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        envanterListesi.appendChild(li);
+    });
+}
+
+function envantereEkle(item) {
+    karakter.envanter.push(item);
+    guncelleEnvanter();
+}
+
+function statKontrolu(stat, zorluk) {
+    return karakter.statlar[stat] >= zorluk;
+}
+
+function olay(metin, secenekler) {
+    oyunMetniAlani.innerHTML += `${metin}<br>`;
+    secenekler.forEach((secenek, index) => {
+        const button = document.createElement('button');
+        button.textContent = secenek.metin;
+        button.onclick = () => secimYap(index);
+        oyunMetniAlani.appendChild(button);
+    });
+}
+
+function secimYap(secimIndex) {
+    const secilenSecenek = mevcutOlay.secenekler[secimIndex];
+    oyunMetniAlani.innerHTML += `<br><br>${typeof secilenSecenek.sonuc === 'function' ? secilenSecenek.sonuc() : secilenSecenek.sonuc}<br><br>`;
+    if (secilenSecenek.sonrakiOlay) {
+        mevcutOlay = secilenSecenek.sonrakiOlay;
+        const devamButton = document.createElement('button');
+        devamButton.textContent = "Devam Et";
+        devamButton.id = "devam-et-butonu";
+        devamButton.onclick = sonrakiOlayiGoster;
+        oyunMetniAlani.appendChild(devamButton);
+    } else {
+        oyunMetniAlani.innerHTML += "<br>Hikayenin bu kısmı sona erdi.";
+    }
+    guncelleEnvanter();
+}
+
 function sonrakiOlayiGoster() {
     oyunMetniAlani.innerHTML = ''; // Önceki metni temizle
     if (mevcutOlay) {
@@ -248,6 +236,3 @@ function sonrakiOlayiGoster() {
         oyunMetniAlani.innerHTML = "Oyun sona erdi.";
     }
 }
-
-// Oyunu başlat
-// İlk olayın metnini ve seçeneklerini doğrudan karakter yaratıldıktan sonra gösteriyoruz.
