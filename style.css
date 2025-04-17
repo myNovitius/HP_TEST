@@ -84,6 +84,22 @@ button:hover {
     background-color: #4cae4c;
 }
 
+#oyun-metni {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#oyun-metni button {
+    display: block; /* Butonları alt alta sırala */
+    width: 100%; /* Butonların tam genişlikte olmasını sağla */
+    box-sizing: border-box; /* Padding'i genişliğe dahil et */
+    margin-bottom: 10px; /* Butonlar arasında boşluk */
+}
+
+h1, h2 {
+    color: #ddd;
+}
+
 #oyun-metni > button#devam-et-butonu {
     position: fixed;
     bottom: 20px; /* Ekranın altından 20 piksel yukarıda */
@@ -101,8 +117,4 @@ button:hover {
 
 #oyun-metni > button#devam-et-butonu:hover {
     background-color: #0056b3;
-}
-
-h1, h2 {
-    color: #ddd;
 }
