@@ -1,49 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>Hogwarts Macerası</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter Metin RPG</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="envanter-alani">
-        <h2>Envanter</h2>
-        <ul id="envanter"></ul>
-    </div>
+    <div id="game-container">
+        <aside id="inventory-panel">
+            <h3>Envanter</h3>
+            <ul id="inventory-list"></ul>
+            <div id="money-status"></div>
+        </aside>
 
-    <div id="karakter-yaratma-ekrani">
-        <h1>Hogwarts Öğrencisi Yarat</h1>
-        <label for="karakter-adi">Adınız:</label>
-        <input type="text" id="karakter-adi"><br><br>
+        <main id="main-content">
+            <section id="character-creation" class="screen">
+                <h2>Karakter Oluştur</h2>
+                <div class="form-group">
+                    <label for="character-name">Adınız:</label>
+                    <input type="text" id="character-name">
+                </div>
+                <div id="ability-distribution">
+                    <h3>Yetenekleri Dağıt (Toplam 30 Puan)</h3>
+                    <div class="ability">
+                        <label for="intelligence">Zeka (1-10):</label>
+                        <div class="ability-input">
+                            <input type="number" id="intelligence" min="1" max="10" value="1">
+                            <span class="ability-value">1</span>
+                        </div>
+                    </div>
+                    <div class="ability">
+                        <label for="courage">Cesaret (1-10):</label>
+                        <div class="ability-input">
+                            <input type="number" id="courage" min="1" max="10" value="1">
+                            <span class="ability-value">1</span>
+                        </div>
+                    </div>
+                    <div class="ability">
+                        <label for="loyalty">Sadakat (1-10):</label>
+                        <div class="ability-input">
+                            <input type="number" id="loyalty" min="1" max="10" value="1">
+                            <span class="ability-value">1</span>
+                        </div>
+                    </div>
+                    <div class="ability">
+                        <label for="ambition">Hırs (1-10):</label>
+                        <div class="ability-input">
+                            <input type="number" id="ambition" min="1" max="10" value="1">
+                            <span class="ability-value">1</span>
+                        </div>
+                    </div>
+                    <p id="remaining-points">Kalan Puan: 30</p>
+                </div>
+                <div id="background-selection">
+                    <h3>Geçmiş Seçimi</h3>
+                    <div class="radio-group">
+                        <input type="radio" id="poor" name="background" value="1">
+                        <label for="poor">Fakir Aile</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="middle" name="background" value="2">
+                        <label for="middle">Orta Halli Aile</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="wealthy" name="background" value="3">
+                        <label for="wealthy">Varlıklı Aile</label>
+                    </div>
+                </div>
+                <button id="create-character-button">Karakter Oluştur</button>
+            </section>
 
-        <label for="bina">Bina:</label>
-        <select id="bina">
-            <option value="Gryffindor">Gryffindor</option>
-            <option value="Hufflepuff">Hufflepuff</option>
-            <option value="Ravenclaw">Ravenclaw</option>
-            <option value="Slytherin">Slytherin</option>
-        </select><br><br>
+            <section id="sorting-hat" class="screen" style="display: none;">
+                <h2>Seçmen Şapka Sınavı</h2>
+                <div id="sorting-hat-question"></div>
+                <div id="sorting-hat-answers"></div>
+                <div id="sorting-hat-result"></div>
+            </section>
 
-        <h2>Statlar</h2>
-        <div id="stat-alanlari">
-            <label for="zeka">Zeka:</label>
-            <input type="number" id="zeka" value="10" min="1" max="20"><br>
+            <section id="diagon-alley" class="screen" style="display: none;">
+                <h2>Diagon Yolu</h2>
+                <div id="shops"></div>
+                <button id="finish-shopping-button" style="display: none;">Alışverişi Bitir</button>
+            </section>
 
-            <label for="cesaret">Cesaret:</label>
-            <input type="number" id="cesaret" value="10" min="1" max="20"><br>
-
-            <label for="azim">Azim:</label>
-            <input type="number" id="azim" value="10" min="1" max="20"><br>
-
-            <label for="wicca">Wicca (Büyü Yeteneği):</label>
-            <input type="number" id="wicca" value="10" min="1" max="20"><br>
-        </div><br>
-
-        <button onclick="karakterYarat()">Karakteri Yarat</button>
-    </div>
-
-    <div id="oyun-alani" style="display: none;">
-        <h1>Hogwarts Macerası Başlıyor!</h1>
-        <div id="oyun-metni"></div>
+            <section id="game-play" class="screen" style="display: none;">
+                <h1>Harry Potter ve Felsefe Taşı</h1>
+                <div id="message-area"></div>
+                <div id="input-area">
+                    <label for="command">Ne yapmak istersiniz?</label>
+                    <input type="text" id="command">
+                    <button id="send-button">Gönder</button>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script src="script.js"></script>
