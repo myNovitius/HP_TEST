@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hogwarts Macerası</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="envanter-alani">
+        <h2>Envanter</h2>
+        <ul id="envanter"></ul>
+    </div>
+
+    <div id="karakter-yaratma-ekrani">
+        <h1>Hogwarts Öğrencisi Yarat</h1>
+        <label for="karakter-adi">Adınız:</label>
+        <input type="text" id="karakter-adi"><br><br>
+
+        <label for="bina">Bina:</label>
+        <select id="bina">
+            <option value="Gryffindor">Gryffindor</option>
+            <option value="Hufflepuff">Hufflepuff</option>
+            <option value="Ravenclaw">Ravenclaw</option>
+            <option value="Slytherin">Slytherin</option>
+        </select><br><br>
+
+        <h2>Statlar</h2>
+        <div id="stat-alanlari">
+            <label for="zeka">Zeka:</label>
+            <input type="number" id="zeka" value="10" min="1" max="20"><br>
+
+            <label for="cesaret">Cesaret:</label>
+            <input type="number" id="cesaret" value="10" min="1" max="20"><br>
+
+            <label for="azim">Azim:</label>
+            <input type="number" id="azim" value="10" min="1" max="20"><br>
+
+            <label for="wicca">Wicca (Büyü Yeteneği):</label>
+            <input type="number" id="wicca" value="10" min="1" max="20"><br>
+        </div><br>
+
+        <button onclick="karakterYarat()">Karakteri Yarat</button>
+    </div>
+
+    <div id="oyun-alani" style="display: none;">
+        <h1>Hogwarts Macerası Başlıyor!</h1>
+        <div id="oyun-metni"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
